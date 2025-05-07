@@ -66,11 +66,20 @@ Try the Colab here using [![Open In Colab](https://colab.research.google.com/ass
 ## Installation
 ### Changes
 
+The original requirements file was quite permissive and I add to change it to make it work. If you run the original one, you might run into problems with Jax and or ml-dtypes. I updated the requirements by restricting the possible versions to make it work.
+
 Install dependencies:
 
-```
+Using `pip`:
+```sh
 pip install -r requirements.txt
 ```
+Or Using `uv`: 
+
+```sh
+uv add -r requirements.txt
+```
+
 
 Setup project:
 
