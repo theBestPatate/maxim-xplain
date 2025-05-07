@@ -66,8 +66,35 @@ Try the Colab here using [![Open In Colab](https://colab.research.google.com/ass
 ## Installation
 ### Changes
 
-The original requirements file was quite permissive and I add to change it to make it work. If you run the original one, you might run into problems with Jax and or ml-dtypes. I updated the requirements by restricting the possible versions to make it work.
+The original requirements file was quite permissive and I add to change it to make it work. If you run the original one, you might run into problems with Jax,ml-dtypes,and or Tensorflow. I updated the requirements by restricting the possible versions to make it work and adding Pillow.
 
+<details>
+  <summary>More details</summary>
+# Resolving Compatibility Issues in the Project
+
+I ran into some compatibility issues while working on the project, and here’s a rundown of the changes I made to get things back on track:
+
+1. **TensorFlow Incompatibility**
+   - I discovered some incompatibility issues between TensorFlow and certain versions of NumPy. If you're curious, check out these links for more details:
+     - [TensorFlow Issue #47691](https://github.com/tensorflow/tensorflow/issues/47691)
+     - [JAX Issue #17693](https://github.com/jax-ml/jax/issues/17693)
+
+2. **NumPy Compatibility**
+   - I hit an error that I suspect is related to TensorFlow. Here’s the scoop:
+     - A module compiled with **NumPy 1.x** just won’t work with **NumPy 2.2.5**—it can crash and burn.
+     - To keep things running smoothly with both **1.x** and **2.x** versions of NumPy, you need to compile your modules with **NumPy 2.0**.
+     - The quick fix? Just downgrade NumPy to a **1.x** version, and you should be good to go!
+
+3. **Deprecation Notices**
+   - The `float8_e4m3b11` type was deprecated in version **0.2.0** and completely removed in version **0.3.0** of JAX.
+   - Also, the `ml-dtypes` library was an implicit dependency before, but now it’s been made explicit and constrained because one of its deprecated functions was causing some issues in the code.
+
+4. **Dependency Updates**
+   - I added **Pillow** to the project dependencies to make sure everything functions as it should.
+
+</details>
+
+### Installation process
 Install dependencies:
 
 Using `pip`:
@@ -83,8 +110,21 @@ uv add -r requirements.txt
 
 Setup project:
 
+<details open>
+  <summary>the -e option</summary>
+  The -e option is well ... optional but useful if you intend to change the code in this repo. Every changes you will made in the source code will be reflected in the loaded maxim library.
+</details>
+
+Using `pip`:
+
+```sh
+pip install -e .
+
 ```
-pip install .
+Or Using `uv`:
+
+```sh
+uv pip install -e
 ```
 
 ## Results and Pre-trained models
