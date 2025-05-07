@@ -64,6 +64,7 @@ Try the Colab here using [![Open In Colab](https://colab.research.google.com/ass
 ![Model overview](maxim/images/overview.png)
 
 ## Installation
+### Changes
 
 Install dependencies:
 
